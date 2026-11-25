@@ -1,0 +1,335 @@
+{
+  "draft": "/home/vedu/Desktop/project/cursive/blog/como-poner-letras-bonitas-en-redes-sociales",
+  "strict": true,
+  "blocked": false,
+  "gates": [
+    {
+      "gate": 1,
+      "name": "Capability Discovery",
+      "passed": true,
+      "violations": [],
+      "warnings": [
+        "live tool availability not provided; MCP image tools cannot be verified from declarations"
+      ],
+      "capabilities": {
+        "live_tools": [],
+        "live_tools_source": "not-provided",
+        "env_keys_present": {
+          "GOOGLE_AI_API_KEY": false,
+          "GEMINI_API_KEY": false,
+          "UNSPLASH_ACCESS_KEY": false,
+          "PEXELS_API_KEY": false,
+          "PIXABAY_API_KEY": false
+        },
+        "python_deps": {
+          "patchright": true,
+          "playwright": false,
+          "weasyprint": true,
+          "google.genai": false,
+          "requests": false,
+          "markdown": true
+        },
+        "project_root": "/home/vedu/Desktop/project/cursive",
+        "project_root_files": {
+          "BRAND.md": false,
+          "VOICE.md": false,
+          "DISCOURSE.md": false
+        },
+        "agents": {
+          "blog-reviewer": true,
+          "blog-researcher": false,
+          "blog-writer": false,
+          "blog-seo": false,
+          "blog-translator": false
+        },
+        "scripts": {
+          "scripts/lint_prose.py": true,
+          "scripts/load_untrusted_root.py": true,
+          "scripts/analyze_blog.py": true
+        },
+        "image_gen_path_available": true,
+        "hero_paths": {
+          "local_hero": "hero.png",
+          "banana_mcp": false,
+          "gemini_api": {
+            "available": false,
+            "paid": true,
+            "requires_consent": true
+          },
+          "stock_api": false,
+          "openverse_reachable": null,
+          "free_path": true,
+          "paid_only": false
+        }
+      }
+    },
+    {
+      "gate": 2,
+      "name": "Format Completeness",
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "artifacts": {
+        "slug": "generador-de-fuentes-de-letras",
+        "md": [
+          "generador-de-fuentes-de-letras.md"
+        ],
+        "html": [
+          "generador-de-fuentes-de-letras.html"
+        ],
+        "pdf": [
+          "generador-de-fuentes-de-letras.pdf"
+        ],
+        "hero": [
+          "hero.png"
+        ],
+        "review_present": true
+      },
+      "hero_checks": [
+        {
+          "file": "hero.png",
+          "format": "PNG",
+          "width": 1200,
+          "height": 630,
+          "decoder": "pillow"
+        }
+      ],
+      "pdf_check": {
+        "file": "generador-de-fuentes-de-letras.pdf",
+        "bytes": 218489,
+        "pages": 8
+      }
+    },
+    {
+      "gate": 3,
+      "name": "Visual Verification",
+      "passed": true,
+      "violations": [],
+      "warnings": [
+        "backend: patchright"
+      ],
+      "per_viewport": {
+        "mobile": {
+          "result": {
+            "hiddenText": {
+              "chars": 0,
+              "elements": 0,
+              "first": null
+            },
+            "overflows": [],
+            "bg": "rgb(250, 250, 249)",
+            "jsonLdValid": true,
+            "jsonLdType": "BlogPosting",
+            "jsonLdMissingFields": [],
+            "jsonLdVisibleConsistent": true,
+            "jsonLdConsistencyMismatches": [],
+            "jsonLdWordCount": 2091,
+            "jsonLdConsistencyDetails": {}
+          },
+          "console_errors": []
+        },
+        "tablet": {
+          "result": {
+            "hiddenText": {
+              "chars": 0,
+              "elements": 0,
+              "first": null
+            },
+            "overflows": [],
+            "bg": "rgb(250, 250, 249)",
+            "jsonLdValid": true,
+            "jsonLdType": "BlogPosting",
+            "jsonLdMissingFields": [],
+            "jsonLdVisibleConsistent": true,
+            "jsonLdConsistencyMismatches": [],
+            "jsonLdWordCount": 2091,
+            "jsonLdConsistencyDetails": {}
+          },
+          "console_errors": []
+        },
+        "desktop": {
+          "result": {
+            "hiddenText": {
+              "chars": 0,
+              "elements": 0,
+              "first": null
+            },
+            "overflows": [],
+            "bg": "rgb(250, 250, 249)",
+            "jsonLdValid": true,
+            "jsonLdType": "BlogPosting",
+            "jsonLdMissingFields": [],
+            "jsonLdVisibleConsistent": true,
+            "jsonLdConsistencyMismatches": [],
+            "jsonLdWordCount": 2091,
+            "jsonLdConsistencyDetails": {}
+          },
+          "console_errors": [],
+          "back_button": {
+            "attempted_back": true,
+            "observation_complete": true,
+            "returned_to_previous": true,
+            "before_url": "file:///home/vedu/Desktop/project/cursive/blog/como-poner-letras-bonitas-en-redes-sociales/generador-de-fuentes-de-letras.html",
+            "after_url": "about:blank",
+            "checked": true,
+            "conclusive": true,
+            "obstructed": false,
+            "violation": null
+          }
+        },
+        "desktop-dark": {
+          "bg": "rgb(24, 24, 27)",
+          "light_bg": "rgb(250, 250, 249)"
+        }
+      }
+    },
+    {
+      "gate": 4,
+      "name": "Content Review",
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "blocking": false,
+      "reason": "score 95/100, no P0 issues remain",
+      "score": 95
+    },
+    {
+      "gate": 5,
+      "name": "Asset + Link Integrity",
+      "passed": true,
+      "violations": [],
+      "warnings": [],
+      "imgs": [
+        "hero.png"
+      ],
+      "links_checked": 34,
+      "generated_links_skipped": 1,
+      "json_ld_valid": true,
+      "declared_word_count": 2091,
+      "schema_validation_source": "source_html",
+      "actual_word_count": 2091,
+      "googlebot_byte_check": {
+        "limit_bytes": 2097152,
+        "artifact_bytes": 24919,
+        "critical_positions": {
+          "title": 297,
+          "meta": 366,
+          "canonical": 557,
+          "json_ld": 2334,
+          "main_content": 6916
+        },
+        "critical_after_cutoff": [],
+        "inline_bloat_bytes": 4565
+      },
+      "discover_check": {
+        "enabled": false
+      }
+    }
+  ],
+  "evidence": {
+    "schema_version": 1,
+    "run_id": "7a7dd86e662b4978bd68457a2d19cd52",
+    "contract_version": "0.0.0",
+    "engine": {
+      "files": {
+        "blog_preflight.py": {
+          "sha256": "0658e1056511c44ff3977c92da866b5e7fa98befd8904560ab1ce1592205bc26",
+          "size": 156363
+        },
+        "blog_studio_status.py": {
+          "sha256": "b1b4de542af37fa9107a38a6c592988b40ae259f5ada6e79a1acf089e8dd0c4d",
+          "size": 20949
+        },
+        "skills/blog/references/blog-delivery-contract.md": {
+          "sha256": "5a0d2dff42778697d2c0eaede771a696c38f898296dd8a8ea704bfe410452d2d",
+          "size": 32454
+        },
+        "agents/blog-reviewer.md": {
+          "sha256": "88a766e7de3efbfbb4e000835e68c396f2b90a97885e560564c1a02440de5753",
+          "size": 2281
+        }
+      },
+      "python": [
+        3,
+        12,
+        3
+      ],
+      "errors": []
+    },
+    "started_at": "2026-11-23T21:40:54.860673+00:00",
+    "finished_at": "2026-11-23T21:41:15.743674+00:00",
+    "requested_gates": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "completed_gates": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "inputs": {
+      "files": {
+        "generador-de-fuentes-de-letras.html": {
+          "sha256": "b1d700afd908ebabefc95105e4b63caca9b9518161b1f64ddff9d65e83a80bc8",
+          "size": 24919
+        },
+        "generador-de-fuentes-de-letras.md": {
+          "sha256": "9577563cebfe9a0e51e9bdcfc55b53a7c5ce47fab4d5997b662df605c96029f4",
+          "size": 16053
+        },
+        "generador-de-fuentes-de-letras.pdf": {
+          "sha256": "b3407c1767570d32d9aa540bd3dfa116eb1674c2ca408a7e39bf7da26bd6d8c5",
+          "size": 218489
+        },
+        "hero-credit.txt": {
+          "sha256": "535f065c9a88423cb9560b1749874d86bd112fa0bb75e9e8c9147b6c1e93a7b3",
+          "size": 128
+        },
+        "hero.png": {
+          "sha256": "04d563c8a850dcc0aa946347ca845cff495fffd662ff45b56bb49e565afa6df8",
+          "size": 171851
+        },
+        "review.md": {
+          "sha256": "01a933e9af5fab8b1db22ef77cdc279692a79501dbb2f45cfdcdbff82326ba78",
+          "size": 1913
+        }
+      },
+      "review_state": {
+        "sha256": "0e3894dd73378a26946384f42408c7c0693b41ae4d912fe4d4ba65854e1d1d53",
+        "size": 716
+      },
+      "errors": []
+    },
+    "inputs_unchanged": true,
+    "outputs": {
+      "files": {
+        "capabilities.json": {
+          "sha256": "ca0a5539a876971e14d52c758dbf34f46c92962f12fbe85f6709d72e3831f3a3",
+          "size": 1181
+        },
+        "preview/desktop-1280-dark.png": {
+          "sha256": "2bdfa9f8bc2c04bcbbf92cadbf40738aaa3854912929858c6711fcd14e330e30",
+          "size": 1396132
+        },
+        "preview/desktop-1280.png": {
+          "sha256": "aab565b165d90b5abb4507470ba8a33c1e498c81d8ff12842bdc40b74fb9dcd9",
+          "size": 1386922
+        },
+        "preview/mobile-375.png": {
+          "sha256": "a758e1f0dcfcc3ea1a23aab6592065a8b635a6580136b01d755a300874e68420",
+          "size": 1236251
+        },
+        "preview/tablet-768.png": {
+          "sha256": "c6b97e9622029b9f829dd3c64ded3deb8d811bd328a9aa9c5b9a6cb4871e8bfa",
+          "size": 1328566
+        }
+      },
+      "errors": []
+    }
+  }
+}
