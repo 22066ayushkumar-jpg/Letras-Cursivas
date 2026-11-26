@@ -1,4 +1,4 @@
-import { buildStyles, buildHybridStyles } from './fonts.js';
+import { buildStyles, buildHybridStyles, buildCholaStyles, buildPequenaStyles } from './fonts.js';
 import { hydrateIcons, iconSvg } from './icons.js';
 
 const PAGE = 100;
@@ -62,6 +62,18 @@ function buildBonitaStyles() {
   return [...plain, ...decorated, ...combining].slice(0, 288).map((s, i) => ({ ...s, id: i + 1 }));
 }
 
+// Chidas page: the exotic alphabets (Monedas, Tailandesa, Griega, Fantasía,
+// asiáticas) plus the bold/gothic/bubble crowd-pleasers, plain versions first,
+// decorated next and combining-mark styles last.
+const CHIDA_BASES = ['Monedas', 'Tailandesa', 'Griega', 'Fantasía', 'Gótica Negrita', 'Gótica', 'Cursiva Negrita', 'Burbujas', 'Burbujas Negras', 'Cuadrados', 'Cuadrados Negros', 'Doble Línea', 'Versalitas', 'Al Revés', 'Paréntesis', 'Ancho Completo', 'Negrita Sans', 'Negrita Serif'];
+function buildChidaStyles() {
+  const pool = buildStyles(1248).filter((s) => CHIDA_BASES.some((b) => s.name === b || s.name.startsWith(b + ' ·')));
+  const plain = pool.filter((s) => !s.name.includes('·'));
+  const decorated = pool.filter((s) => s.tags.includes('decorada'));
+  const combining = pool.filter((s) => s.name.includes('·') && !s.tags.includes('decorada'));
+  return [...plain, ...decorated, ...combining].slice(0, 320).map((s, i) => ({ ...s, id: i + 1 }));
+}
+
 function initGenerator() {
   // Each page picks its own alphabet family: <body data-fontset="cursiva">, "gotica",
   // "gotica-cursiva", "bonita" or "todas" (the broad pool: 500 by default,
@@ -72,6 +84,12 @@ function initGenerator() {
   const DEFAULT_TEXT = defaultText || 'Letras Cursivas';
   const POOL = fontset === 'gotica-cursiva'
     ? buildHybridStyles()
+    : fontset === 'chola'
+      ? buildCholaStyles()
+      : fontset === 'pequena'
+        ? buildPequenaStyles()
+        : fontset === 'chida'
+          ? buildChidaStyles()
     : fontset === 'bonita'
       ? buildBonitaStyles()
       : fontset === 'todas'

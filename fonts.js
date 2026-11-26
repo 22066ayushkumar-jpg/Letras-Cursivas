@@ -219,3 +219,91 @@ export function buildHybridStyles() {
   );
   return styles.map((s, i) => ({ id: i + 1, ...s }));
 }
+
+// --- Letras cholas -------------------------------------------------------------
+// Rotulación chicana: blackletter (fraktur) y script de tatuaje con los adornos
+// propios del barrio — cruces, corona, calavera, rosa marchita, daga y fuego.
+// Builders independientes: no tocan VARIANTS ni los pools de las demás páginas.
+const CHOLA_BASES = [
+  { name: 'Chola Clásica', tags: ['chola'], map: FRAKTUR },
+  { name: 'Chola Negrita', tags: ['chola', 'negrita'], map: FRAKTUR_BOLD },
+  { name: 'Chola Script', tags: ['chola'], map: SCRIPT },
+  { name: 'Chola Script Negrita', tags: ['chola', 'negrita'], map: SCRIPT_BOLD },
+  { name: 'Chola Doble', tags: ['chola'], map: math(0x1d538, 0x1d552, 0x1d7d8, { C: 'ℂ', H: 'ℍ', N: 'ℕ', P: 'ℙ', Q: 'ℚ', R: 'ℝ', Z: 'ℤ' }) },
+  { name: 'Chola Serif', tags: ['chola'], map: math(0x1d434, 0x1d44e, null, { h: 'ℎ' }) },
+];
+const CHOLA_VARIANTS = [{ name: '', tags: [] }]
+  .concat(
+    [
+      ['Cruces', '✞ ', ' ✞'], ['Corona', '♛ ', ' ♛'], ['Calavera', '☠ ', ' ☠'],
+      ['Rosa Marchita', '🥀 ', ' 🥀'], ['Daga', '† ', ' †'], ['Fuego', '🔥 ', ' 🔥'],
+      ['Alas', '꧁༺ ', ' ༻꧂'], ['Guerrero', '꧁༒☬ ', ' ☬༒꧂'], ['Real', '꧁ ', ' ꧂'],
+      ['Estrellas', '★ ', ' ★'], ['Cruz Latina', '✝ ', ' ✝'],
+    ].map(([name, pre, post]) => ({ name, pre, post, tags: ['decorada'] }))
+  )
+  .concat(
+    [['Subrayada', '\u0332'], ['Tachada', '\u0336']].map(([name, mark]) => ({ name, mark, tags: [] }))
+  )
+  .concat(
+    [['Espaciada', ' '], ['Punto Medio', '·']].map(([name, sep]) => ({ name, sep, tags: ['decorada'] }))
+  );
+
+export function buildCholaStyles() {
+  const styles = [];
+  CHOLA_BASES.forEach((base) =>
+    CHOLA_VARIANTS.forEach((v) =>
+      styles.push({
+        name: v.name ? `${base.name} · ${v.name}` : base.name,
+        tags: [...new Set(['chola', ...base.tags, ...v.tags])],
+        convert: (t) => convert(t, base, v),
+      })
+    )
+  );
+  return styles.map((s, i) => ({ id: i + 1, ...s }));
+}
+
+// --- Letras pequeñas -------------------------------------------------------------
+// Versalitas, superíndice ("voladas") y subíndice. Unicode no tiene todas las
+// letras en pequeño: la q no existe en versalitas ni en superíndice, la x de
+// versalitas es la x normal y el subíndice solo cubre a,e,h,i,j,k,l,m,n,o,p,r,s,t,u,v,x.
+// Las letras que faltan se quedan en tamaño normal, igual que en cualquier conversor.
+const SUBSCRIPT = (() => {
+  const m = {};
+  const pairs = { a: 'ₐ', e: 'ₑ', h: 'ₕ', i: 'ᵢ', j: 'ⱼ', k: 'ₖ', l: 'ₗ', m: 'ₘ', n: 'ₙ', o: 'ₒ', p: 'ₚ', r: 'ᵣ', s: 'ₛ', t: 'ₜ', u: 'ᵤ', v: 'ᵥ', x: 'ₓ' };
+  Object.entries(pairs).forEach(([c, s]) => { m[c] = s; m[c.toUpperCase()] = s; });
+  '₀₁₂₃₄₅₆₇₈₉'.split('').forEach((d, i) => (m[String(i)] = d));
+  return m;
+})();
+const PEQUENA_BASES = [
+  { name: 'Versalitas', tags: ['pequena'], map: fromStrings('ᴀʙᴄᴅᴇꜰɢʜɪᴊᴋʟᴍɴᴏᴘǫʀꜱᴛᴜᴠᴡxʏᴢ') },
+  { name: 'Pequeñitas Arriba', tags: ['pequena'], map: fromStrings('ᵃᵇᶜᵈᵉᶠᵍʰⁱʲᵏˡᵐⁿᵒᵖqʳˢᵗᵘᵛʷˣʸᶻ', 'ᴬᴮᶜᴰᴱᶠᴳᴴᴵᴶᴷᴸᴹᴺᴼᴾQᴿˢᵀᵁⱽᵂˣʸᶻ', '⁰¹²³⁴⁵⁶⁷⁸⁹') },
+  { name: 'Pequeñitas Abajo', tags: ['pequena'], map: SUBSCRIPT },
+];
+const PEQUENA_VARIANTS = [{ name: '', tags: [] }]
+  .concat(
+    [
+      ['Estrellas', '★ ', ' ★'], ['Corazones', '♡ ', ' ♡'], ['Flores', '❀ ', ' ❀'],
+      ['Brillo', '⋆｡°✩ ', ' ✩°｡⋆'], ['Chispas', '✧･ﾟ ', ' ✧･ﾟ'], ['Corchetes', '『', '』'],
+      ['Mariposas', '🦋 ', ' 🦋'], ['Luna', '☾ ', ' ☽'], ['Puntitos', '•°• ', ' •°•'],
+    ].map(([name, pre, post]) => ({ name, pre, post, tags: ['decorada'] }))
+  )
+  .concat(
+    [['Subrayada', '\u0332'], ['Tachada', '\u0336']].map(([name, mark]) => ({ name, mark, tags: [] }))
+  )
+  .concat(
+    [['Espaciada', ' '], ['Entre Puntos', '•']].map(([name, sep]) => ({ name, sep, tags: ['decorada'] }))
+  );
+
+export function buildPequenaStyles() {
+  const styles = [];
+  PEQUENA_BASES.forEach((base) =>
+    PEQUENA_VARIANTS.forEach((v) =>
+      styles.push({
+        name: v.name ? `${base.name} · ${v.name}` : base.name,
+        tags: [...new Set(['pequena', ...base.tags, ...v.tags])],
+        convert: (t) => convert(t, base, v),
+      })
+    )
+  );
+  return styles.map((s, i) => ({ id: i + 1, ...s }));
+}
