@@ -74,6 +74,16 @@ function buildChidaStyles() {
   return [...plain, ...decorated, ...combining].slice(0, 320).map((s, i) => ({ ...s, id: i + 1 }));
 }
 
+// Burbuja page: the two bubble alphabets (circled and filled circled) with
+// every decoration, separator and combining variant.
+function buildBurbujaStyles() {
+  const pool = buildStyles(1248).filter((s) => s.name === 'Burbujas' || s.name.startsWith('Burbujas ·') || s.name === 'Burbujas Negras' || s.name.startsWith('Burbujas Negras ·'));
+  const plain = pool.filter((s) => !s.name.includes('·'));
+  const decorated = pool.filter((s) => s.tags.includes('decorada'));
+  const combining = pool.filter((s) => s.name.includes('·') && !s.tags.includes('decorada'));
+  return [...plain, ...decorated, ...combining].map((s, i) => ({ ...s, id: i + 1 }));
+}
+
 function initGenerator() {
   // Each page picks its own alphabet family: <body data-fontset="cursiva">, "gotica",
   // "gotica-cursiva", "bonita" or "todas" (the broad pool: 500 by default,
@@ -90,6 +100,8 @@ function initGenerator() {
         ? buildPequenaStyles()
         : fontset === 'chida'
           ? buildChidaStyles()
+          : fontset === 'burbuja'
+            ? buildBurbujaStyles()
     : fontset === 'bonita'
       ? buildBonitaStyles()
       : fontset === 'todas'
