@@ -84,6 +84,17 @@ function buildBurbujaStyles() {
   return [...plain, ...decorated, ...combining].map((s, i) => ({ ...s, id: i + 1 }));
 }
 
+// Graffiti page: blackletter, block and sharp alphabets plus the combining
+// "drip" variants (Puntos / Ola Inferior) that imitate dripping paint.
+const GRAFFITI_BASES = ['Gótica Negrita', 'Gótica', 'Cuadrados Negros', 'Cuadrados', 'Doble Línea', 'Al Revés', 'Negrita Sans', 'Ancho Completo'];
+function buildGraffitiStyles() {
+  const pool = buildStyles(1248).filter((s) => GRAFFITI_BASES.some((b) => s.name === b || s.name.startsWith(b + ' ·')));
+  const plain = pool.filter((s) => !s.name.includes('·'));
+  const decorated = pool.filter((s) => s.tags.includes('decorada'));
+  const combining = pool.filter((s) => s.name.includes('·') && !s.tags.includes('decorada'));
+  return [...plain, ...decorated, ...combining].slice(0, 320).map((s, i) => ({ ...s, id: i + 1 }));
+}
+
 function initGenerator() {
   // Each page picks its own alphabet family: <body data-fontset="cursiva">, "gotica",
   // "gotica-cursiva", "bonita" or "todas" (the broad pool: 500 by default,
@@ -102,6 +113,8 @@ function initGenerator() {
           ? buildChidaStyles()
           : fontset === 'burbuja'
             ? buildBurbujaStyles()
+            : fontset === 'graffiti'
+              ? buildGraffitiStyles()
     : fontset === 'bonita'
       ? buildBonitaStyles()
       : fontset === 'todas'
